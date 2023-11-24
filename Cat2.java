@@ -1,5 +1,6 @@
 package formativeLeson11;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.sql.*;
 public class Cat2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -124,8 +125,45 @@ public class Cat2 extends JFrame {
 		JButton submitBtn = new JButton("Submit");
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String Name=nametextField.getText();
+				String Username=userNametextField.getText();
+				String Password=PasswordtextField.getText();
+				String Email=Email_textField.getText();
+				String PhoneNumb=Phone_textField.getText();
+				String Address=Adress_textf.getText();
+				String ConfirmPassword=ConfirmPasstextField.getText();
+				
+				
+				
+				 try {
+	                    
+	                    Class.forName("com.mysql.cj.jdbc.Driver");
+
+	                    // Replace the placeholder values with your actual database credentials and connection details
+	                    //Class.forName("com.mysql.cj.jdbc.Driver");
+	    				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Registration","root","0928");
+	    				String sql="select * from login where name=? AND Username=? AND Password=? AND Email=? AND PhoneNumb=? AND Address=?";
+	    				PreparedStatement pst=con.prepareStatement(sql);
+	    				pst.setString(1,Name);
+	    				pst.setString(2,Username);
+	    				pst.setString(3,Password);
+	    				pst.setString(4,Email);
+	    				pst.setString(5,PhoneNumb);
+	    				pst.setString(6,Address);
+	    				
+	    				ResultSet rs=pst.executeQuery();
+	                 
+	                    
+
+	                  
+
+	                } catch(Exception e1){
+						System.out.println(e1);
+						}
+				}
+	            
 			}
-		});
+		);
 		submitBtn.setBounds(90, 221, 85, 21);
 		contentPane.add(submitBtn);
 		
